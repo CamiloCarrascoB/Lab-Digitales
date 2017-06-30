@@ -149,20 +149,45 @@ void loop() {
 
     I3 = ypr[2]*180/M_PI;
     
-    if (I1-I2>6.0 && I2-I3<0)
+    if (I1-I2>6.0 && abs(I2-I3)<1)
+    {
+      escribir("a");
+    }
+    else if (I1-I2>5.5 && abs(I2-I3)<1)
     {
       escribir("b");
-      //delay(100);
     }
-    else if (I1-I2>4.0 && I2-I3<0)
+    else if (I1-I2>5.0 && abs(I2-I3)<1)
     {
       escribir("c");
-      //delay(100);
     }
-    else if (I1-I2>2.0 && I2-I3<0)
+    else if (I1-I2>4.5 && abs(I2-I3)<1)
     {
       escribir("d");
-      //delay(100);
+    }
+    else if (I1-I2>4.0 && abs(I2-I3)<1)
+    {
+      escribir("e");
+    }
+    else if (I1-I2>3.5 && abs(I2-I3)<1)
+    {
+      escribir("f");
+    }
+    else if (I1-I2>3.0 && abs(I2-I3)<1)
+    {
+      escribir("g");
+    }
+    else if (I1-I2>2.5 && abs(I2-I3)<1)
+    {
+      escribir("h");
+    }
+    else if (I1-I2>2.0 && abs(I2-I3)<1)
+    {
+      escribir("i");
+    }
+    else if (I1-I2>1.5 && abs(I2-I3)<1)
+    {
+      escribir("j");
     }
 
     I1 = I2;
