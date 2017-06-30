@@ -25,7 +25,9 @@ MPU6050 mpu;
 #define OUTPUT_READABLE_YAWPITCHROLL
 #define LED_PIN 13 // (Arduino is 13, Teensy is 11, Teensy++ is 6)
 bool blinkState = false;
-float v = 0;
+float I1 = 0;
+float I2 = 0;
+float I3 = 0;
 
 // MPU control/status vars
 bool dmpReady = false;  // set true if DMP init was successful
@@ -145,22 +147,26 @@ void loop() {
     mpu.dmpGetGravity(&gravity, &q);
     mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
 
-    if ( v - (ypr[2] * 180 / M_PI) > 6.0)
+    I3 = ypr[2]*180/M_PI;
+    
+    if (I1-I2>6.0 && I2-I3<0)
     {
       escribir("b");
-      delay(100);
+      //delay(100);
     }
-    else if ( v - (ypr[2] * 180 / M_PI) > 4.0)
+    else if (I1-I2>4.0 && I2-I3<0)
     {
       escribir("c");
-      delay(100);
+      //delay(100);
     }
-    else if ( v - (ypr[2] * 180 / M_PI) > 2.0)
+    else if (I1-I2>2.0 && I2-I3<0)
     {
       escribir("d");
-      delay(100);
+      //delay(100);
     }
-    v = ypr[2] * 180 / M_PI;
+
+    I1 = I2;
+    I2 = I3;
 #endif
     blinkState = !blinkState;
     digitalWrite(LED_PIN, blinkState);
